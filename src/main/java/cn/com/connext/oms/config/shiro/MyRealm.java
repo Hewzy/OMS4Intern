@@ -54,7 +54,6 @@ public class MyRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		System.out.println("token.getPrincipal:" + token.getPrincipal());
 		String userName = token.getPrincipal().toString();
 		TbUser userByName = loginService.findUserByName(userName);
 		if (userByName != null) {

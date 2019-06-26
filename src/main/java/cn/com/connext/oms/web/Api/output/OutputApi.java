@@ -2,9 +2,11 @@ package cn.com.connext.oms.web.Api.output;
 
 import cn.com.connext.oms.commons.dto.output.OutRepoOrderDetailDto;
 import cn.com.connext.oms.commons.dto.output.OutputDTO;
+import cn.com.connext.oms.commons.utils.HttpClientUtils.HttpClientUtil;
 import cn.com.connext.oms.entity.TbOrder;
 import cn.com.connext.oms.entity.TbOutput;
 import cn.com.connext.oms.entity.TbReceiver;
+import cn.com.connext.oms.web.Api.exchange.RestTemplateConfig;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -29,7 +31,7 @@ public class OutputApi {
                 tbOrder.getDeliveryCompany(),
                 repoOrderDetailDto
         );
-        String result= new RestTemplate().postForObject("http://10.129.100.48:8080/api/pushOutRepoOrder",outputDTO.toMap(),String.class);
+        String result= new RestTemplate().postForObject("http://10.129.100.59:8080/api/pushOutRepoOrder",outputDTO.toMap(),String.class);
         return result;
     }
     }
