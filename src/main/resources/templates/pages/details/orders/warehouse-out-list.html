@@ -15,7 +15,7 @@
 <div id="outputList">
     <div id="mask_shadow"></div>
     <div class="btn-div">
-        <button type="button" class="btn btn-primary"  id="MyAbnormalModel" @click="viewOutputDetails">查看订单</button>
+        <button type="button" class="btn btn-primary" id="MyAbnormalModel" @click="viewOutputDetails">查看订单</button>
         <button type="button" class="btn btn-primary" @click="confirmReceipt">确认收货</button>
         <div class="search-box">
             <form action="">
@@ -50,7 +50,7 @@
             <template v-for="list in outputDate.list" v-cloak>
                 <tr>
                     <td>
-                        <input type="radio" :value="list.orderId" v-model="checkedDate" >
+                        <input type="radio" :value="list.orderId" v-model="checkedDate">
                     </td>
                     <td>{{list.orderId}}</td>
                     <td>{{list.orderState}}</td>
@@ -105,6 +105,49 @@
                 <li @click="to_page(outputDate.pageNum+1)"><a href="#">&raquo;</a></li>
             </template>
         </ul>
+
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <template v-if="outputDate.hasPreviousPage==false">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                </template>
+                <template v-if="outputDate.hasPreviousPage==true">
+                    <li @click="to_page(outputDate.pageNum-1)">
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                </template>
+                <template v-for="pagenum in outputDate.navigatepageNums">
+                    <ul v-if="pagenum==outputDate.pageNum">
+                        <li class="active"><a href="#">{{pagenum}}</a></li>
+                    </ul>
+                    <ul v-if="pagenum!=outputDate.pageNum">
+                        <li><a href="#" @click="to_page(pagenum)">{{pagenum}}</a></li>
+                    </ul>
+                </template>
+                <template v-if="outputDate.hasNextPage==false">
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                </template>
+                <template v-if="outputDate.hasNextPage==true">
+                <li @click="to_page(outputDate.pageNum+1)">
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                </template>
+            </ul>
+        </nav>
+
     </div>
     <!-- 弹出框 -->
     <div class="modal fade" id="demoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"

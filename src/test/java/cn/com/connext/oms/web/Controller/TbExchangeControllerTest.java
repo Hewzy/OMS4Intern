@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.expression.Ids;
 
 import java.util.Date;
-
+import cn.hutool.json.JSONObject;
 /** 
 * TbExchangeController Tester. 
 * 
@@ -106,6 +106,18 @@ public void testToAudit() throws Exception {
         e.printStackTrace();
     }
 }
-
+@Test
+    public void test11(){
+    String jsonStr ="{responseHeader:{status:0,QTime:0},spellcheck:{suggestions:{中国:{numFound:9,startOffset:0,endOffset:2," +
+            "suggestion:[中国工商银行, 中国人民, 中国国际, 中国农业, 中国市场, 中国经济, 中国人, 中国广播, 中国文化]}}," +
+            "collations:{collation:中国工商银行}}}";
+    JSONObject jsonObject = new JSONObject(jsonStr);
+    if (jsonObject.get("spellcheck")==null){
+        return ;
+    }
+    JSONObject params = (JSONObject) jsonObject.get("spellcheck");
+    String t = String.valueOf(params.get("collations"));
+    System.out.println("111111"+params.get("collations"));
+}
 
 } 
